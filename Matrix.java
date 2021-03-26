@@ -114,4 +114,25 @@ public class Matrix {
 		
 		return total;
 	}
+	
+	// matrix-matrix multiplication
+	public Matrix multMatrix(Matrix other) {
+		
+		// evaluate operation validity
+		if (this.cols != other.rows) {
+			throw new NullPointerException("matrix multiplication invalid");
+		}
+		
+		Matrix total = new Matrix(this.rows, other.cols);
+		
+		for (int totalRow = 0; totalRow < this.rows; totalRow ++) {
+			for (int totalCol = 0; totalCol < other.cols; totalCol ++) {
+				for (int multCounter = 0; multCounter < this.cols; multCounter ++) {
+					total.constructor[totalRow][totalCol] += this.constructor[totalRow][multCounter] * other.constructor[multCounter][totalCol];
+				}
+			}
+		}
+		
+		return total;
+	}
 }
