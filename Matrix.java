@@ -51,6 +51,7 @@ public class Matrix {
 		System.out.println(" ");
 	}
 	
+	// initialize matrix with all zeros
 	/**
 	 * Initializes matrix will all values as zero.
 	 * @param numRows Number of rows in matrix.
@@ -95,6 +96,7 @@ public class Matrix {
 		return total;
 	}
 	
+	// matrix scalar multiplication
 	/**
 	 * Multiply matrix by given scalar.
 	 * @param scalar The scalar to multiply by.
@@ -107,27 +109,6 @@ public class Matrix {
 		for (int i = 0; i < this.constructor.length; i ++) {
 			for (int j = 0; j < this.constructor[0].length; j ++) {
 				total.constructor[i][j] = this.constructor[i][j] * scalar;
-			}
-		}
-		
-		return total;
-	}
-	
-	// matrix-matrix multiplication
-	public Matrix multMatrix(Matrix other) {
-		
-		// evaluate operation validity
-		if (this.cols != other.rows) {
-			throw new NullPointerException("matrix multiplication invalid");
-		}
-		
-		Matrix total = new Matrix(this.rows, other.cols);
-		
-		for (int totalRow = 0; totalRow < this.rows; totalRow ++) {
-			for (int totalCol = 0; totalCol < other.cols; totalCol ++) {
-				for (int multCounter = 0; multCounter < this.cols; multCounter ++) {
-					total.constructor[totalRow][totalCol] += this.constructor[totalRow][multCounter] * other.constructor[multCounter][totalCol];
-				}
 			}
 		}
 		
