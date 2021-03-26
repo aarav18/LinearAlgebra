@@ -135,4 +135,55 @@ public class Matrix {
 		
 		return total;
 	}
+	
+	// sub matrix (ignore first row + first column)
+		public Matrix sub() {
+			
+			// evaluate operation validity
+			if (!this.isSquare()) {
+				throw new NullPointerException("matrix sub invalid");
+			}
+			
+			if (this.rows <= 2) {
+				throw new NullPointerException("matrix sub invalid");
+			}
+			
+			// sub-matrix algorithm
+			Matrix sub = new Matrix(this.rows - 1, this.cols - 1);
+			
+			if (this.rows != 2) {
+				for (int row = 0; row < sub.rows; row ++) {
+					for (int col = 0; col < sub.cols; col ++) {
+						sub.constructor[row][col] = this.constructor[row + 1][col + 1];
+					}
+				}
+			}
+			return sub;
+		}
+		
+		// determinant
+		public double det() {
+			
+			// evaluate operation validity
+			if (!this.isSquare()) {
+				throw new NullPointerException("matrix determinant invalid");
+			}
+			
+			if (this.rows == 2) {
+				return (this.constructor[0][0]) * (this.constructor[1][1] - this.constructor[0][1] * this.constructor[1][0]);
+			}
+			
+			// find sub-matrix of mtr
+			Matrix sub = this.sub();
+			
+			// recursion
+			if (sub.rows == 2) {
+				System.out.println("Final Iteration");
+				return (this.constructor[0][0]) * (this.constructor[1][1] - this.constructor[0][1] * this.constructor[1][0]);
+			} else {
+				sub.det();
+			}
+			
+			return 0.0;
+		}
 }
